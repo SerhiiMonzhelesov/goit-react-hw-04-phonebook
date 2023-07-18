@@ -2,26 +2,17 @@ import { useState } from 'react';
 import StyledContactForm from './StyledContactForm';
 import PropTypes from 'prop-types';
 
-function ContactForm(contacts, addContact) {
-  // state = {
-  //   name: '',
-  //   number: '',
-  // };
-
+function ContactForm({ addContact }) {
   const [states, setStates] = useState({ name: '', number: '' });
 
   const onInputChange = e => {
-    setStates({ [e.target.name]: e.target.value });
+    setStates({ ...states, [e.target.name]: e.target.value });
   };
 
   const onFormSubmit = e => {
     e.preventDefault();
 
-    const isAlready = contacts.some(contact => contact.name === states.name);
-
-    isAlready
-      ? alert(`${states.name} is already in contacts`)
-      : addContact(states);
+    addContact(states);
 
     e.target.reset();
   };

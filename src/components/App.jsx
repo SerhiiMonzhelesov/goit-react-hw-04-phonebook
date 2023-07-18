@@ -20,12 +20,17 @@ function App() {
     localStorage.setItem('contacts', stringifiedContacts);
   }, [contacts]);
 
-  const addContact = contact => {
+  const addContact = contactData => {
+    const isAlready = contacts.some(
+      contact => contact.name === contactData.name
+    );
     const newContact = {
       id: nanoid(),
-      ...contact,
+      ...contactData,
     };
-    setContacts(() => [...contacts, newContact]);
+    isAlready
+      ? alert(`${contactData.name} is already in contacts`)
+      : setContacts(() => [...contacts, newContact]);
   };
 
   const handleChangeFilter = e => {
