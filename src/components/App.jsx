@@ -30,7 +30,7 @@ function App() {
     };
     isAlready
       ? alert(`${contactData.name} is already in contacts`)
-      : setContacts(() => [...contacts, newContact]);
+      : setContacts((prevState) => [...prevState, newContact]);
   };
 
   const handleChangeFilter = e => {
